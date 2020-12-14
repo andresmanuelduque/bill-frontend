@@ -5,7 +5,7 @@ const validateEmail = (email)=>{
 }
 
 const validateStringLength = (value,gte,lte)=>{
-    const re = /^[a-zÀ-úA-Z]*$/g;
+    const re = /^[a-zÀ-úA-Z_ ]*$/g;
     let valid = false;
     if(re.test(value) && (value.length<=lte && value.length>=gte )){
         valid = true;
@@ -21,6 +21,24 @@ const validateAlphanumericLength = (value,gte,lte)=>{
     return valid;
 }
 
+const validateNumberFloat = (value)=>{
+    const re = /^-?\d*(\.\d+)?$/g;
+    let valid = false;
+    if(re.test(value) && value!==""){
+        valid = true;
+    }
+    return valid;
+}
+
+const validateNumberOrPoint = (value)=>{
+    const re = /^\d.*$/g;
+    let valid = false;
+    if(re.test(value) || value===""){
+        valid = true;
+    }
+    return valid;
+}
+
 const validateNumberLength = (value,gte,lte)=>{
     const re = /^\d+$/;
     let valid = false;
@@ -30,14 +48,32 @@ const validateNumberLength = (value,gte,lte)=>{
     return valid;
 }
 
+const validateNumberRange = (value,gte,lte)=>{
+    const re = /^\d+$/;
+    let valid = false;
+    if(re.test(value) && (value<=lte && value>=gte )){
+        valid = true;
+    }
+    return valid;
+}
+
 const validateOnlyNumber = (value)=>{
     const re = /^\d+$/;
     return (re.test(value) || value === "");
 }
+
+const validateIsBoolean = (value)=>{
+    return (typeof value === "boolean");
+}
+
 export {
     validateEmail,
     validateStringLength,
     validateNumberLength,
     validateAlphanumericLength,
-    validateOnlyNumber
+    validateOnlyNumber,
+    validateNumberFloat,
+    validateNumberOrPoint,
+    validateNumberRange,
+    validateIsBoolean
 }

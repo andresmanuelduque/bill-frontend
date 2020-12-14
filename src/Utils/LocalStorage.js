@@ -4,6 +4,13 @@ const setUserInfo = (userInfo)=>{
     localStorage.lastName = userInfo.lastName;
 }
 
+const cleanUserInfo = ()=>{
+    localStorage.removeItem("token");
+    localStorage.removeItem("firstName");
+    localStorage.removeItem("lastName");
+}
+
 export {
-    setUserInfo
+    setUserInfo,
+    cleanUserInfo
 }
