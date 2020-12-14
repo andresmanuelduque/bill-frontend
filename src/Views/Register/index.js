@@ -3,7 +3,7 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import {validateEmail,validateStringLength,validateOnlyNumber,validateNumberLength,validateAlphanumericLength} from "../../Utils/Validation";
 import {registerUser} from "../../Services/UserService";
 import { toast } from 'react-toastify';
-import { useHistory } from "react-router-dom";
+import {Redirect, useHistory} from "react-router-dom";
 import './style.css';
 
 
@@ -97,6 +97,11 @@ function Register(){
         }
         return isValid;
     }
+
+    if(localStorage.token){
+        return <Redirect to="/home"/>
+    }
+
     return(
         <div className="form-container">
             <Form>

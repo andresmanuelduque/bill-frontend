@@ -4,10 +4,11 @@ import {
     validateAlphanumericLength,
     validateEmail
 } from "../../Utils/Validation";
+import "./style.css"
 
 import {toast} from "react-toastify";
 import {loginUser} from "../../Services/UserService";
-import {useHistory} from "react-router-dom";
+import {Redirect, useHistory} from "react-router-dom";
 import {setUserInfo} from "../../Utils/LocalStorage";
 
 function Login() {
@@ -74,6 +75,10 @@ function Login() {
             })
     }
 
+    if(localStorage.token){
+        return <Redirect to="/home"/>
+    }
+
     return(
         <div className="form-container">
             <Form>
@@ -100,8 +105,9 @@ function Login() {
                     />
                 </FormGroup>
 
-                <FormGroup>
+                <FormGroup className="button-container">
                     <Button onClick={handleSendData} disabled={!allDataIsValid} color="primary">Enviar</Button>
+                    <a href="/register" color="info">Registrate</a>
                 </FormGroup>
 
             </Form>

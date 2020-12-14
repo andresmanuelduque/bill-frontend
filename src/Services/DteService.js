@@ -26,6 +26,31 @@ const createDte = (dteData)=>{
     })
 }
 
+const listDte = (page)=>{
+    return new Promise((resolve,reject)=>{
+        fetch(`${process.env.REACT_APP_API_BASE_URL}/dte/list?page=${page}`,{
+            method:'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization':`Bearer ${localStorage.token}`
+            }
+        }).then(response=>{
+            if(response.status===401){
+                HandleUnauthorized();
+                throw new Error(response.status)
+            }
+            return response.json()
+        }).then(response=>{
+            if(response.success)resolve(response);
+            else reject(response)
+        }).catch(err=>{
+            console.log(err);
+        })
+    })
+}
+
 export {
-    createDte
+    createDte,
+    listDte
 }

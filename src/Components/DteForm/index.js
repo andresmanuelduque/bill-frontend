@@ -181,7 +181,7 @@ function DteForm() {
                             onChange={(e)=>handleInputModify('itemType',e.target.value)}
                         >
                             <option disabled selected >Seleccione...</option>
-                            <option value="PRODCUTO">PRODUCTO</option>
+                            <option value="PRODUCTO">PRODUCTO</option>
                             <option value="SERVICIO">SERVICIO</option>
                         </Input>
                     </FormGroup>
