@@ -1,6 +1,5 @@
-.form-container{
-    height: 100vh;
+.button-container{
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
 }

@@ -1,19 +1,21 @@
 import React,{useEffect,useState} from 'react';
-import {Button, Form, FormGroup, Input, Label} from "reactstrap";
+import {Button, Form, FormGroup, Input, Label,Spinner} from "reactstrap";
 import {
     validateAlphanumericLength,
     validateEmail
 } from "../../Utils/Validation";
+import "./style.css"
 
 import {toast} from "react-toastify";
 import {loginUser} from "../../Services/UserService";
-import {useHistory} from "react-router-dom";
+import {Redirect, useHistory} from "react-router-dom";
 import {setUserInfo} from "../../Utils/LocalStorage";
 
 function Login() {
 
     let history = useHistory();
 
+    const [loading,setLoading] = useState(false);
     const [credentialsData,setUserData] = useState({
         "email":"",
         "password":""
@@ -63,15 +65,22 @@ function Login() {
     }
 
     const handleSendData = ()=>{
+        setLoading(true);
         loginUser(credentialsData)
             .then((res)=>{
+                setLoading(false);
                 toast.success(res.message);
                 setUserInfo(res.data[0]);
                 history.push('/home');
             })
             .catch((err)=>{
+                setLoading(false);
                 toast.error(err.message);
             })
+    }
+
+    if(localStorage.token){
+        return <Redirect to="/home"/>
     }
 
     return(
@@ -100,8 +109,10 @@ function Login() {
                     />
                 </FormGroup>
 
-                <FormGroup>
+                <FormGroup className="button-container">
                     <Button onClick={handleSendData} disabled={!allDataIsValid} color="primary">Enviar</Button>
+                    {loading && <Spinner color="primary" />}
+                    <a href="/register" color="info">Registrate</a>
                 </FormGroup>
 
             </Form>
