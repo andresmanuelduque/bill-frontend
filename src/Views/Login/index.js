@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react';
-import {Button, Form, FormGroup, Input, Label} from "reactstrap";
+import {Button, Form, FormGroup, Input, Label,Spinner} from "reactstrap";
 import {
     validateAlphanumericLength,
     validateEmail
@@ -15,6 +15,7 @@ function Login() {
 
     let history = useHistory();
 
+    const [loading,setLoading] = useState(false);
     const [credentialsData,setUserData] = useState({
         "email":"",
         "password":""
@@ -64,13 +65,16 @@ function Login() {
     }
 
     const handleSendData = ()=>{
+        setLoading(true);
         loginUser(credentialsData)
             .then((res)=>{
+                setLoading(false);
                 toast.success(res.message);
                 setUserInfo(res.data[0]);
                 history.push('/home');
             })
             .catch((err)=>{
+                setLoading(false);
                 toast.error(err.message);
             })
     }
@@ -107,6 +111,7 @@ function Login() {
 
                 <FormGroup className="button-container">
                     <Button onClick={handleSendData} disabled={!allDataIsValid} color="primary">Enviar</Button>
+                    {loading && <Spinner color="primary" />}
                     <a href="/register" color="info">Registrate</a>
                 </FormGroup>
 

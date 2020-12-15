@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import {Container, FormGroup, Label, Input, Row, Col, Button} from 'reactstrap';
+import {Container, FormGroup, Label, Input, Row, Col, Button , Spinner} from 'reactstrap';
 import './style.css'
 import {createDte} from "../../Services/DteService";
 import {
@@ -18,7 +18,7 @@ import {useHistory} from "react-router-dom";
 function DteForm() {
 
     let history = useHistory();
-
+    const [loading,setLoading] = useState(false);
     const [taxes,setTaxes] = useState(0);
     const [discounts,setDiscounts] = useState(0);
     const [subtotalAmount,setSubtotalAmount] = useState(0);
@@ -126,12 +126,15 @@ function DteForm() {
     })
 
     const handleSendData = ()=>{
+        setLoading(true);
         createDte(dteData)
             .then((res)=>{
+                setLoading(false);
                 toast.success(res.message);
                 history.push('/home');
             })
             .catch((err)=>{
+                setLoading(false);
                 toast.error(err.message);
             })
     }
@@ -280,7 +283,9 @@ function DteForm() {
             <Row>
                 <Col xs="12" className="col-items-center">
                     <Button onClick={handleSendData} disabled={!allDataIsValid} color="primary">Enviar</Button>
+                    {loading && <Spinner color="primary"/>}
                 </Col>
+
             </Row>
         </Container>
     );

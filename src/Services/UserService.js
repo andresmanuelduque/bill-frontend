@@ -38,7 +38,28 @@ const loginUser = (credentials)=>{
     })
 }
 
+const getBalance = ()=>{
+    return new Promise((resolve,reject)=>{
+        fetch(`${process.env.REACT_APP_API_BASE_URL}/user/balance`,{
+            method:'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${localStorage.token}`
+            }
+        }).then(response=>{
+            return response.json()
+        }).then(response=>{
+            if(response.success)resolve(response);
+            else reject(response)
+        }).catch(err=>{
+            reject(err);
+        })
+    })
+}
+
 export {
     registerUser,
-    loginUser
+    loginUser,
+    getBalance
 }

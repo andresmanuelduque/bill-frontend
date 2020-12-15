@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input ,Spinner} from 'reactstrap';
 import {validateEmail,validateStringLength,validateOnlyNumber,validateNumberLength,validateAlphanumericLength} from "../../Utils/Validation";
 import {registerUser} from "../../Services/UserService";
 import { toast } from 'react-toastify';
@@ -10,6 +10,8 @@ import './style.css';
 function Register(){
 
     let history = useHistory();
+
+    const [loading,setLoading] = useState(false);
 
     const [userData,setUserData] = useState({
         "firstName":"",
@@ -76,12 +78,15 @@ function Register(){
     }
 
     const handleSendData = ()=>{
+        setLoading(true);
         registerUser(userData)
             .then((res)=>{
+                setLoading(true);
                 toast.success(res.message);
-                history.push('/login');
+                history.push('/');
             })
             .catch((err)=>{
+                setLoading(false);
                 toast.error(err.message);
             })
     }
@@ -179,6 +184,7 @@ function Register(){
                 </FormGroup>
                 <FormGroup>
                     <Button onClick={handleSendData} disabled={!allDataIsValid} color="primary">Enviar</Button>
+                    {loading && <Spinner color="primary"/>}
                 </FormGroup>
 
             </Form>

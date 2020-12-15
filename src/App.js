@@ -6,6 +6,7 @@ import Register from "./Views/Register";
 import Home from "./Views/Home";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import Pay from "./Views/Pay";
 
 function App() {
 
@@ -20,7 +21,7 @@ function App() {
                 <Switch>
                     <Route exact path="/" component={Login} />
                     <Route path="/register" component={Register} />
-                    {/*<Route path="/pay/:token" component={} exact/>*/}
+                    <Route path="/pay/:token" component={Pay} exact/>
                     <Route path="/home" component={Home} />
                 </Switch>
             </Router>
