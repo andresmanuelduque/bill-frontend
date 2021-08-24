@@ -2,7 +2,7 @@ import {HandleUnauthorized} from "../Utils/Authorization";
 
 const createDte = (dteData)=>{
     return new Promise((resolve,reject)=>{
-        fetch(`${process.env.REACT_APP_API_BASE_URL}/dte/create`,{
+        fetch(`${process.env.REACT_APP_API_BASE_URL}/bill/create`,{
             method:'POST',
             body: JSON.stringify(dteData),
             headers: {
@@ -27,7 +27,7 @@ const createDte = (dteData)=>{
 
 const payDte = (payData)=>{
     return new Promise((resolve,reject)=>{
-        fetch(`${process.env.REACT_APP_API_BASE_URL}/dte/pay`,{
+        fetch(`${process.env.REACT_APP_API_BASE_URL}/bill/pay`,{
             method:'POST',
             body: JSON.stringify(payData),
             headers: {
@@ -51,7 +51,7 @@ const payDte = (payData)=>{
 
 const listDte = (page)=>{
     return new Promise((resolve,reject)=>{
-        fetch(`${process.env.REACT_APP_API_BASE_URL}/dte/list?page=${page}`,{
+        fetch(`${process.env.REACT_APP_API_BASE_URL}/bill/list?page=${page}`,{
             method:'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -75,7 +75,7 @@ const listDte = (page)=>{
 
 const listDteByFrequency = (frequency)=>{
     return new Promise((resolve,reject)=>{
-        fetch(`${process.env.REACT_APP_API_BASE_URL}/dte/list/frequency/${frequency}`,{
+        fetch(`${process.env.REACT_APP_API_BASE_URL}/bill/list/frequency/${frequency}`,{
             method:'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -99,7 +99,7 @@ const listDteByFrequency = (frequency)=>{
 
 const getDteByToken = (token)=>{
     return new Promise((resolve,reject)=>{
-        fetch(`${process.env.REACT_APP_API_BASE_URL}/dte/token/${token}`,{
+        fetch(`${process.env.REACT_APP_API_BASE_URL}/bill/token/${token}`,{
             method:'GET',
             headers: {
                 'Content-Type': 'application/json',
