@@ -12,7 +12,7 @@ _Estas instrucciones te permitirán obtener una copia del proyecto en funcionami
 ```
 Para configurar el proyecto necesitas:
 
-NodeJS
+NodeJS > 12.0
 Yarn
 ```
 
@@ -28,7 +28,7 @@ Ir a la raiz del proyecto
 
 ```
 REACT_APP_IVA_PERCENT = Porcentaje de iva para el calculo de impuestos
-REACT_APP_API_BASE_URL = URL base de la REST API para la administracion de facturas (dte-backend)
+REACT_APP_API_BASE_URL = URL base de la API Gateway para la administracion de facturas (bill-backend)
 ```
 
 * Ejecutar el siguiente comando para levantar el servicio en el puerto 3000
